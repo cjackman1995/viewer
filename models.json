@@ -1,0 +1,23 @@
+{
+  "models": [
+    {
+      "id": "meshy-1103",
+      "name": "Textured Asset 1103",
+      "description": "Meshy AI generated model with baked texture. Sample entry — replace file path with the hosted .glb.",
+      "file": "models/meshy-1103.glb"
+    },
+    {
+      "id": "example-crate",
+      "name": "Supply Crate",
+      "description": "Example placeholder. Delete or replace.",
+      "file": "models/example-crate.glb"
+    },
+    {
+      "id": "example-sword",
+      "name": "Iron Sword",
+      "description": "Example placeholder. Delete or replace.",
+      "file": "models/example-sword.glb",
+      "iosSrc": "models/example-sword.usdz"
+    }
+  ]
+}

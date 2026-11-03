@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CoopsGames — 3D Viewer</title>
+
+<!-- Google's model-viewer web component: handles GLB/GLTF, orbit, zoom, and AR. Pinned version. -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<!-- QR code generator (for the on-screen "Share" panel). -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+<style>
+  :root{
+    --bg:#15161a; --bg-2:#1d1f25; --stage-1:#2a2d35; --stage-2:#17181c;
+    --fg:#f2f3f5; --muted:#9aa0ab; --line:#2e313a;
+    --accent:#6ad1b4; --accent-ink:#04120d;
+    --radius:14px;
+    --font: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --body: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:var(--body); -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
+    padding-top:env(safe-area-inset-top,0); padding-bottom:env(safe-area-inset-bottom,0);
+  }
+
+  /* Top bar */
+  header{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:14px max(16px,env(safe-area-inset-left,0)) 14px max(16px,env(safe-area-inset-right,0));
+    border-bottom:1px solid var(--line); background:var(--bg-2); flex:0 0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:10px; min-width:0}
+  .brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);
+    display:grid;place-items:center;color:var(--accent-ink);font-weight:800;font-size:14px;
+    font-family:var(--font); flex:0 0 auto}
+  .brand .name{font-family:var(--font); font-weight:700; letter-spacing:.2px; font-size:15px}
+  .brand .name span{color:var(--muted); font-weight:500}
+  .top-actions{display:flex; gap:8px; flex:0 0 auto}
+
+  button{font-family:var(--body); cursor:pointer}
+  .btn{
+    border:1px solid var(--line); background:#23262e; color:var(--fg);
+    padding:8px 13px; border-radius:10px; font-size:13.5px; font-weight:600;
+    display:inline-flex; align-items:center; gap:7px; transition:background .15s, border-color .15s;
+  }
+  .btn:hover{background:#2b2f39; border-color:#3a3e49}
+  .btn svg{width:15px;height:15px}
+
+  /* Stage */
+  main{position:relative; flex:1 1 auto; min-height:0}
+  model-viewer{
+    width:100%; height:100%;
+    background:radial-gradient(130% 110% at 50% 18%, var(--stage-1) 0%, var(--stage-2) 70%);
+    --poster-color:transparent;
+  }
+  /* Caption overlay, bottom-left */
+  .caption{
+    position:absolute; left:max(16px,env(safe-area-inset-left,0)); bottom:16px;
+    max-width:min(420px, calc(100% - 32px)); pointer-events:none;
+  }
+  .caption h1{font-family:var(--font); font-size:19px; margin:0 0 4px; font-weight:700; text-wrap:balance;
+    text-shadow:0 1px 10px rgba(0,0,0,.5)}
+  .caption p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.45;
+    text-shadow:0 1px 8px rgba(0,0,0,.5)}
+
+  /* Loading bar */
+  .progress{position:absolute; left:0; right:0; top:0; height:3px; background:transparent; overflow:hidden}
+  .progress .fill{height:100%; width:0; background:var(--accent); transition:width .2s ease}
+  .progress[hidden]{display:none}
+
+  /* Hint chip */
+  .hint{position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    background:rgba(20,21,26,.7); backdrop-filter:blur(6px);
+    border:1px solid var(--line); color:var(--muted); font-size:12px;
+    padding:6px 12px; border-radius:999px; transition:opacity .4s}
+
+  /* Message state (not found / no model) */
+  .message{position:absolute; inset:0; display:none; place-items:center; text-align:center; padding:24px}
+  .message.show{display:grid}
+  .message .card{max-width:360px}
+  .message h2{font-family:var(--font); margin:0 0 8px; font-size:20px}
+  .message p{color:var(--muted); margin:0 0 18px; line-height:1.5}
+
+  /* Share modal */
+  .overlay{position:fixed; inset:0; background:rgba(8,9,12,.72); display:none;
+    place-items:center; padding:20px; z-index:50}
+  .overlay.show{display:grid}
+  .sheet{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--radius);
+    width:min(380px,100%); padding:22px; text-align:center}
+  .sheet h3{font-family:var(--font); margin:0 0 4px; font-size:17px}
+  .sheet .sub{color:var(--muted); font-size:13px; margin:0 0 16px}
+  .qr-wrap{background:#fff; border-radius:12px; padding:14px; display:inline-block; margin-bottom:16px}
+  .qr-wrap canvas{display:block}
+  .link-row{display:flex; gap:8px; margin-bottom:14px}
+  .link-row input{flex:1; min-width:0; background:#101116; border:1px solid var(--line);
+    color:var(--fg); border-radius:9px; padding:9px 11px; font-size:12.5px; font-family:ui-monospace,monospace}
+  .btn-primary{width:100%; justify-content:center; background:var(--accent); color:var(--accent-ink);
+    border-color:transparent; font-weight:700}
+  .btn-primary:hover{background:#7adcc0}
+  .close-x{position:absolute}
+  .toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:13px;
+    padding:10px 18px; border-radius:999px; opacity:0; transition:opacity .2s; z-index:60; pointer-events:none}
+  .toast.show{opacity:1}
+
+  a.link{color:var(--accent); text-decoration:none; font-weight:600}
+  a.link:hover{text-decoration:underline}
+
+  @media (max-width:520px){
+    .brand .name span{display:none}
+    .caption h1{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+    <span class="dot">C</span>
+    <span class="name">CoopsGames <span>· 3D Viewer</span></span>
+  </a>
+  <div class="top-actions">
+    <button class="btn" id="arBtn" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v12l8 4 8-4V6z"/><path d="M4 6l8 4 8-4M12 10v12"/></svg>
+      View in your space
+    </button>
+    <button class="btn" id="shareBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+      Share
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="progress" id="progress"><div class="fill" id="progressFill"></div></div>
+
+  <model-viewer id="mv"
+    camera-controls
+    touch-action="pan-y"
+    auto-rotate auto-rotate-delay="3000" rotation-per-second="18deg"
+    interaction-prompt="none"
+    shadow-intensity="1" shadow-softness="0.8"
+    exposure="1.05" tone-mapping="neutral"
+    environment-image="neutral"
+    ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto"
+    loading="eager" reveal="auto">
+  </model-viewer>
+
+  <div class="hint" id="hint">Drag to rotate · scroll to zoom</div>
+
+  <div class="caption" id="caption" hidden>
+    <h1 id="mTitle"></h1>
+    <p id="mDesc"></p>
+  </div>
+
+  <div class="message" id="message">
+    <div class="card">
+      <h2 id="msgTitle">Model not found</h2>
+      <p id="msgBody">This link doesn't point to a model in the catalog.</p>
+      <a class="link" href="index.html">Browse all models →</a>
+    </div>
+  </div>
+</main>
+
+<!-- Share / QR modal -->
+<div class="overlay" id="overlay">
+  <div class="sheet">
+    <h3 id="shareTitle">Share this model</h3>
+    <p class="sub">Scan the code or copy the link.</p>
+    <div class="qr-wrap"><canvas id="qr"></canvas></div>
+    <div class="link-row">
+      <input id="shareUrl" readonly>
+      <button class="btn" id="copyBtn">Copy</button>
+    </div>
+    <button class="btn-primary btn" id="closeBtn">Done</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Link copied</div>
+
+<script>
+(function(){
+  const qs = new URLSearchParams(location.search);
+  const mv = document.getElementById('mv');
+  const caption = document.getElementById('caption');
+  const message = document.getElementById('message');
+  const progress = document.getElementById('progress');
+  const progressFill = document.getElementById('progressFill');
+  const hint = document.getElementById('hint');
+  const arBtn = document.getElementById('arBtn');
+
+  function showMessage(title, body){
+    document.getElementById('msgTitle').textContent = title;
+    document.getElementById('msgBody').textContent = body;
+    message.classList.add('show');
+    progress.hidden = true;
+    hint.style.display = 'none';
+  }
+
+  function loadModel(entry){
+    mv.src = entry.file;
+    if (entry.iosSrc) mv.setAttribute('ios-src', entry.iosSrc); // USDZ for iOS AR, optional
+    if (entry.poster) mv.setAttribute('poster', entry.poster);
+    mv.alt = entry.name || 'CoopsGames 3D model';
+    document.getElementById('mTitle').textContent = entry.name || '';
+    document.getElementById('mDesc').textContent = entry.description || '';
+    if (entry.name || entry.description) caption.hidden = false;
+    document.title = (entry.name ? entry.name + ' · ' : '') + 'CoopsGames 3D Viewer';
+    document.getElementById('shareTitle').textContent = entry.name ? 'Share ' + entry.name : 'Share this model';
+  }
+
+  // Resolve which model to show.
+  // 1) ?src=<direct URL to a .glb>  (quick one-off, no manifest needed)
+  // 2) ?m=<id>  -> look it up in models.json
+  const directSrc = qs.get('src');
+  const id = qs.get('m');
+
+  if (directSrc) {
+    loadModel({ file: directSrc, name: qs.get('name') || '', description: qs.get('desc') || '' });
+  } else if (id) {
+    fetch('models.json', {cache:'no-cache'})
+      .then(r => { if(!r.ok) throw new Error('manifest'); return r.json(); })
+      .then(data => {
+        const list = Array.isArray(data) ? data : (data.models || []);
+        const entry = list.find(x => x.id === id);
+        if (!entry) { showMessage('Model not found', 'No model with id “'+id+'” is in the catalog yet.'); return; }
+        loadModel(entry);
+      })
+      .catch(() => showMessage('Catalog unavailable', 'Could not load the model list. Check that models.json is published next to this page.'));
+  } else {
+    showMessage('No model selected', 'Add ?m=<id> to the link, or open the gallery to pick one.');
+  }
+
+  // Loading progress + AR availability
+  mv.addEventListener('progress', e => {
+    const p = e.detail.totalProgress;
+    progress.hidden = false;
+    progressFill.style.width = Math.round(p*100) + '%';
+    if (p >= 1) setTimeout(()=>{ progress.hidden = true; }, 300);
+  });
+  mv.addEventListener('load', () => {
+    if (mv.canActivateAR) arBtn.hidden = false;
+    setTimeout(()=>{ hint.style.opacity = '0'; }, 4000);
+  });
+  mv.addEventListener('error', () => showMessage('Could not load model', 'The model file failed to load. It may be missing or blocked by the host.'));
+  arBtn.addEventListener('click', () => mv.activateAR());
+
+  // ---- Share / QR ----
+  const overlay = document.getElementById('overlay');
+  const shareUrlInput = document.getElementById('shareUrl');
+  const toast = document.getElementById('toast');
+
+  function openShare(){
+    const url = location.href;
+    shareUrlInput.value = url;
+    try {
+      QRCode.toCanvas(document.getElementById('qr'), url, { width: 220, margin: 1,
+        color: { dark:'#15161a', light:'#ffffff' } });
+    } catch(e){}
+    overlay.classList.add('show');
+  }
+  document.getElementById('shareBtn').addEventListener('click', openShare);
+  document.getElementById('closeBtn').addEventListener('click', ()=>overlay.classList.remove('show'));
+  overlay.addEventListener('click', e => { if(e.target===overlay) overlay.classList.remove('show'); });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const v = shareUrlInput.value;
+    const done = () => { toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(v).then(done).catch(()=>{ shareUrlInput.select(); document.execCommand('copy'); done(); });
+    } else { shareUrlInput.select(); document.execCommand('copy'); done(); }
+  });
+})();
+</script>
+</body>
+</html>
