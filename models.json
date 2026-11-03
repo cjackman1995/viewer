@@ -16,6 +16,66 @@
   ],
   "models": [
     {
+      "id": "single-roll-crusher",
+      "name": "Single Roll Crusher",
+      "category": "Roll Crushers",
+      "subcategory": "Single Roll Crushers",
+      "shown": "36x40 shown",
+      "tagline": "Rugged size reduction of minerals and friable materials by impact, shear, and compression.",
+      "description": "Williams Single Roll Crushers reduce friable materials through a combination of impact, shear, and compression against a toothed roll. Simple, low-profile, and easy to maintain, they handle larger feed sizes at high capacity with consistent product size and minimal fines, and have long been used as primary and secondary coal crushers.",
+      "file": "models/36x40-single-roll-crusher.glb",
+      "poster": "posters/36x40-single-roll-crusher.jpg",
+      "specs": [
+        {
+          "label": "Available sizes",
+          "value": "15x10 - 36x50"
+        },
+        {
+          "label": "Roll size (shown)",
+          "value": "36 x 40 in (dia. x width)"
+        },
+        {
+          "label": "Usual drive",
+          "value": "150-200 HP @ 900 RPM"
+        },
+        {
+          "label": "Max feed (coal)",
+          "value": "12-15 in"
+        },
+        {
+          "label": "Reduction ratio",
+          "value": "Up to 8:1"
+        },
+        {
+          "label": "Product size",
+          "value": "Down to minus 1 in"
+        },
+        {
+          "label": "Approx. weight (36x40)",
+          "value": "17,500 lb"
+        },
+        {
+          "label": "Design",
+          "value": "Single toothed roll - impact, shear and compression"
+        }
+      ],
+      "applications": [
+        "Coal (primary & secondary)",
+        "Limestone",
+        "Gypsum",
+        "Shale & sandstone",
+        "Glass",
+        "Clay",
+        "Minerals & friable materials"
+      ],
+      "documents": [
+        {
+          "label": "Bulletin 915R - Roll Crushers (PDF)",
+          "file": "docs/roll-crushers-bulletin.pdf"
+        }
+      ]
+    },
+    {
       "id": "no-nife-hog",
       "name": "No-Nife Hog",
       "category": "Forest Products",
@@ -26,13 +86,34 @@
       "file": "models/30ks-nn-hog.glb",
       "poster": "posters/no-nife-hog.jpg",
       "specs": [
-        { "label": "Available sizes", "value": "20KS – 60KS" },
-        { "label": "Capacity", "value": "Up to 300 TPH" },
-        { "label": "Feed opening (30KS)", "value": "24 in (610 mm)" },
-        { "label": "Total weight (30KS)", "value": "11,708 lb" },
-        { "label": "Rotor weight (30KS)", "value": "2,908 lb" },
-        { "label": "Max drive", "value": "Up to 1,250 HP" },
-        { "label": "Design", "value": "Swing-hammer impact, no knives" }
+        {
+          "label": "Available sizes",
+          "value": "20KS – 60KS"
+        },
+        {
+          "label": "Capacity",
+          "value": "Up to 300 TPH"
+        },
+        {
+          "label": "Feed opening (30KS)",
+          "value": "24 in (610 mm)"
+        },
+        {
+          "label": "Total weight (30KS)",
+          "value": "11,708 lb"
+        },
+        {
+          "label": "Rotor weight (30KS)",
+          "value": "2,908 lb"
+        },
+        {
+          "label": "Max drive",
+          "value": "Up to 1,250 HP"
+        },
+        {
+          "label": "Design",
+          "value": "Swing-hammer impact, no knives"
+        }
       ],
       "applications": [
         "Sawmill",
@@ -44,7 +125,10 @@
         "Hog fuel & biomass"
       ],
       "documents": [
-        { "label": "Bulletin 844 — No-Nife Hogs (PDF)", "file": "docs/no-nife-hogs-bulletin.pdf" }
+        {
+          "label": "Bulletin 844 — No-Nife Hogs (PDF)",
+          "file": "docs/no-nife-hogs-bulletin.pdf"
+        }
       ]
     }
   ]
