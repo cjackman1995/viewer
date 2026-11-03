@@ -300,7 +300,7 @@
     if (docs) html += '<h3>Downloads</h3><div class="docs">'+docs+'</div>';
 
     const subj = encodeURIComponent('Quote request — ' + (entry.name||'Williams equipment'));
-    html += '<a class="cta" href="mailto:'+SALES_EMAIL+'?subject='+subj+'">Request a quote</a>';
+    html += '<a class="cta" href="https://www.williamscrusher.com/info-request" target="_blank" rel="noopener">Request a quote</a>';
     panelBody.innerHTML = html;
 
     document.getElementById('pSub').textContent = entry.subcategory || entry.category || '';
