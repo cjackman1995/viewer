@@ -32,14 +32,13 @@
   header{
     display:flex; align-items:center; justify-content:space-between; gap:12px;
     padding:14px max(16px,env(safe-area-inset-left,0)) 14px max(16px,env(safe-area-inset-right,0));
-    border-bottom:1px solid var(--line); background:var(--bg-2); flex:0 0 auto;
+    border-bottom:1px solid var(--line); background:var(--bg-2); flex:0 0 auto; z-index:20;
   }
   .brand{display:flex; align-items:center; gap:10px; min-width:0}
-  .brand .logo-chip{background:#fff;border-radius:7px;padding:5px 9px;display:inline-flex;
-    align-items:center;flex:0 0 auto}
+  .brand .logo-chip{background:#fff;border-radius:7px;padding:5px 9px;display:inline-flex;align-items:center;flex:0 0 auto}
   .brand .logo-chip img{height:22px;width:auto;display:block}
-  .brand .name{font-family:var(--font); font-weight:700; letter-spacing:.2px; font-size:14px;
-    color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-size:11.5px}
+  .brand .name{font-family:var(--font); font-weight:700; color:var(--muted);
+    text-transform:uppercase; letter-spacing:1px; font-size:11.5px}
   .top-actions{display:flex; gap:8px; flex:0 0 auto}
 
   button{font-family:var(--body); cursor:pointer}
@@ -50,6 +49,7 @@
   }
   .btn:hover{background:#2b2f39; border-color:#3a3e49}
   .btn svg{width:15px;height:15px}
+  .btn.active{border-color:var(--accent); color:#fff}
 
   /* Stage */
   main{position:relative; flex:1 1 auto; min-height:0}
@@ -63,10 +63,12 @@
     position:absolute; left:max(16px,env(safe-area-inset-left,0)); bottom:16px;
     max-width:min(420px, calc(100% - 32px)); pointer-events:none;
   }
-  .caption h1{font-family:var(--font); font-size:19px; margin:0 0 4px; font-weight:700; text-wrap:balance;
+  .caption .sub{margin:0 0 3px; font-size:11px; font-weight:700; letter-spacing:.8px;
+    text-transform:uppercase; color:var(--accent); text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .caption h1{font-family:var(--font); font-size:20px; margin:0 0 4px; font-weight:700; text-wrap:balance;
     text-shadow:0 1px 10px rgba(0,0,0,.5)}
-  .caption p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.45;
-    text-shadow:0 1px 8px rgba(0,0,0,.5)}
+  .caption p{margin:0; font-size:13.5px; color:#c7ccd4; line-height:1.45;
+    text-shadow:0 1px 8px rgba(0,0,0,.6)}
 
   /* Loading bar */
   .progress{position:absolute; left:0; right:0; top:0; height:3px; background:transparent; overflow:hidden}
@@ -86,6 +88,50 @@
   .message h2{font-family:var(--font); margin:0 0 8px; font-size:20px}
   .message p{color:var(--muted); margin:0 0 18px; line-height:1.5}
 
+  /* Details / specs panel */
+  .panel{
+    position:absolute; top:0; right:0; height:100%; width:min(380px, 92vw);
+    background:var(--bg-2); border-left:1px solid var(--line);
+    transform:translateX(100%); transition:transform .25s ease;
+    display:flex; flex-direction:column; z-index:30; box-shadow:-18px 0 40px rgba(0,0,0,.35);
+  }
+  .panel.open{transform:translateX(0)}
+  .panel-head{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    padding:18px 18px 14px; border-bottom:1px solid var(--line); flex:0 0 auto}
+  .panel-head .sub{margin:0 0 4px; font-size:11px; font-weight:700; letter-spacing:.8px;
+    text-transform:uppercase; color:var(--accent)}
+  .panel-head h2{font-family:var(--font); margin:0; font-size:19px; font-weight:700}
+  .panel-head .shown{color:var(--muted); font-size:12px; margin:3px 0 0}
+  .panel-x{border:none; background:transparent; color:var(--muted); font-size:22px; line-height:1;
+    padding:2px 6px; border-radius:8px}
+  .panel-x:hover{background:#2b2f39; color:var(--fg)}
+  .panel-body{overflow-y:auto; padding:16px 18px 24px; flex:1 1 auto}
+  .panel-body h3{font-family:var(--font); font-size:12px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--muted); margin:20px 0 10px; font-weight:700}
+  .panel-body h3:first-child{margin-top:0}
+  .lede{color:#c7ccd4; font-size:13.5px; line-height:1.55; margin:0}
+
+  table.specs{width:100%; border-collapse:collapse; font-size:13.5px}
+  table.specs td{padding:9px 0; border-bottom:1px solid var(--line); vertical-align:top}
+  table.specs td.k{color:var(--muted); padding-right:12px; white-space:nowrap}
+  table.specs td.v{text-align:right; font-weight:600; font-family:var(--font)}
+
+  .chips{display:flex; flex-wrap:wrap; gap:7px}
+  .chip{background:#23262e; border:1px solid var(--line); color:#c7ccd4;
+    font-size:12px; padding:5px 10px; border-radius:999px}
+
+  .docs{display:flex; flex-direction:column; gap:8px}
+  .doc{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--fg);
+    background:#23262e; border:1px solid var(--line); border-radius:10px; padding:11px 13px;
+    font-size:13.5px; font-weight:600; transition:background .15s, border-color .15s}
+  .doc:hover{background:#2b2f39; border-color:var(--accent)}
+  .doc svg{width:17px; height:17px; color:var(--accent); flex:0 0 auto}
+
+  .cta{display:block; text-align:center; text-decoration:none; margin-top:22px;
+    background:var(--accent); color:#fff; font-weight:700; font-family:var(--font);
+    padding:12px; border-radius:11px; font-size:14px}
+  .cta:hover{background:#c21019}
+
   /* Share modal */
   .overlay{position:fixed; inset:0; background:rgba(8,9,12,.72); display:none;
     place-items:center; padding:20px; z-index:50}
@@ -93,27 +139,33 @@
   .sheet{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--radius);
     width:min(380px,100%); padding:22px; text-align:center}
   .sheet h3{font-family:var(--font); margin:0 0 4px; font-size:17px}
-  .sheet .sub{color:var(--muted); font-size:13px; margin:0 0 16px}
+  .sheet .subt{color:var(--muted); font-size:13px; margin:0 0 16px}
   .qr-wrap{background:#fff; border-radius:12px; padding:14px; display:inline-block; margin-bottom:16px}
   .qr-wrap canvas{display:block}
   .link-row{display:flex; gap:8px; margin-bottom:14px}
   .link-row input{flex:1; min-width:0; background:#101116; border:1px solid var(--line);
     color:var(--fg); border-radius:9px; padding:9px 11px; font-size:12.5px; font-family:ui-monospace,monospace}
-  .btn-primary{width:100%; justify-content:center; background:var(--accent); color:var(--accent-ink);
+  .btn-primary{width:100%; justify-content:center; background:var(--accent); color:#fff;
     border-color:transparent; font-weight:700}
   .btn-primary:hover{background:#c21019}
-  .close-x{position:absolute}
   .toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
-    background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:13px;
+    background:var(--accent); color:#fff; font-weight:700; font-size:13px;
     padding:10px 18px; border-radius:999px; opacity:0; transition:opacity .2s; z-index:60; pointer-events:none}
   .toast.show{opacity:1}
 
   a.link{color:var(--accent); text-decoration:none; font-weight:600}
   a.link:hover{text-decoration:underline}
 
-  @media (max-width:520px){
-    .brand .name span{display:none}
+  @media (max-width:640px){
+    .brand .name{display:none}
+    .btn .lbl{display:none}
+    .btn{padding:9px 11px}
     .caption h1{font-size:17px}
+    /* panel becomes a bottom sheet */
+    .panel{top:auto; bottom:0; left:0; right:0; width:100%; height:auto; max-height:78%;
+      border-left:none; border-top:1px solid var(--line); border-radius:16px 16px 0 0;
+      transform:translateY(100%); box-shadow:0 -18px 40px rgba(0,0,0,.4)}
+    .panel.open{transform:translateY(0)}
   }
 </style>
 </head>
@@ -125,13 +177,17 @@
     <span class="name">3D Viewer</span>
   </a>
   <div class="top-actions">
+    <button class="btn" id="detailsBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span class="lbl">Details</span>
+    </button>
     <button class="btn" id="arBtn" hidden>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v12l8 4 8-4V6z"/><path d="M4 6l8 4 8-4M12 10v12"/></svg>
-      View in your space
+      <span class="lbl">View in your space</span>
     </button>
     <button class="btn" id="shareBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-      Share
+      <span class="lbl">Share</span>
     </button>
   </div>
 </header>
@@ -154,15 +210,29 @@
   <div class="hint" id="hint">Drag to rotate · scroll to zoom</div>
 
   <div class="caption" id="caption" hidden>
+    <p class="sub" id="mSub"></p>
     <h1 id="mTitle"></h1>
-    <p id="mDesc"></p>
+    <p id="mTag"></p>
   </div>
+
+  <!-- Details / specs panel -->
+  <aside class="panel" id="panel" aria-hidden="true">
+    <div class="panel-head">
+      <div>
+        <p class="sub" id="pSub"></p>
+        <h2 id="pTitle"></h2>
+        <p class="shown" id="pShown"></p>
+      </div>
+      <button class="panel-x" id="panelClose" aria-label="Close details">&times;</button>
+    </div>
+    <div class="panel-body" id="panelBody"></div>
+  </aside>
 
   <div class="message" id="message">
     <div class="card">
       <h2 id="msgTitle">Model not found</h2>
       <p id="msgBody">This link doesn't point to a model in the catalog.</p>
-      <a class="link" href="index.html">Browse all models →</a>
+      <a class="link" href="index.html">Browse the catalog →</a>
     </div>
   </div>
 </main>
@@ -171,7 +241,7 @@
 <div class="overlay" id="overlay">
   <div class="sheet">
     <h3 id="shareTitle">Share this model</h3>
-    <p class="sub">Scan the code or copy the link.</p>
+    <p class="subt">Scan the code or copy the link.</p>
     <div class="qr-wrap"><canvas id="qr"></canvas></div>
     <div class="link-row">
       <input id="shareUrl" readonly>
@@ -193,6 +263,15 @@
   const progressFill = document.getElementById('progressFill');
   const hint = document.getElementById('hint');
   const arBtn = document.getElementById('arBtn');
+  const detailsBtn = document.getElementById('detailsBtn');
+  const panel = document.getElementById('panel');
+  const panelBody = document.getElementById('panelBody');
+
+  // --- Contact / quote target (edit to your real address) ---
+  const SALES_EMAIL = 'sales@williamscrusher.com';
+
+  function esc(s){ return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
   function showMessage(title, body){
     document.getElementById('msgTitle').textContent = title;
@@ -200,18 +279,58 @@
     message.classList.add('show');
     progress.hidden = true;
     hint.style.display = 'none';
+    detailsBtn.style.display = 'none';
   }
 
+  let CURRENT = null;
+
+  function buildPanel(entry){
+    const rows = (entry.specs||[]).map(s =>
+      '<tr><td class="k">'+esc(s.label)+'</td><td class="v">'+esc(s.value)+'</td></tr>').join('');
+    const chips = (entry.applications||[]).map(a => '<span class="chip">'+esc(a)+'</span>').join('');
+    const docs = (entry.documents||[]).map(d =>
+      '<a class="doc" href="'+esc(d.file)+'" target="_blank" rel="noopener">'+
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>'+
+      esc(d.label)+'</a>').join('');
+
+    let html = '';
+    if (entry.description) html += '<p class="lede">'+esc(entry.description)+'</p>';
+    if (rows) html += '<h3>Specifications</h3><table class="specs"><tbody>'+rows+'</tbody></table>';
+    if (chips) html += '<h3>Applications</h3><div class="chips">'+chips+'</div>';
+    if (docs) html += '<h3>Downloads</h3><div class="docs">'+docs+'</div>';
+
+    const subj = encodeURIComponent('Quote request — ' + (entry.name||'Williams equipment'));
+    html += '<a class="cta" href="mailto:'+SALES_EMAIL+'?subject='+subj+'">Request a quote</a>';
+    panelBody.innerHTML = html;
+
+    document.getElementById('pSub').textContent = entry.subcategory || entry.category || '';
+    document.getElementById('pTitle').textContent = entry.name || '';
+    document.getElementById('pShown').textContent = entry.shown || '';
+  }
+
+  function openPanel(){ panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); detailsBtn.classList.add('active'); }
+  function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); detailsBtn.classList.remove('active'); }
+  detailsBtn.addEventListener('click', () => panel.classList.contains('open') ? closePanel() : openPanel());
+  document.getElementById('panelClose').addEventListener('click', closePanel);
+
   function loadModel(entry){
+    CURRENT = entry;
     mv.src = entry.file;
     if (entry.iosSrc) mv.setAttribute('ios-src', entry.iosSrc); // USDZ for iOS AR, optional
     if (entry.poster) mv.setAttribute('poster', entry.poster);
     mv.alt = entry.name || 'Williams equipment model';
+
+    document.getElementById('mSub').textContent = entry.subcategory || entry.category || '';
     document.getElementById('mTitle').textContent = entry.name || '';
-    document.getElementById('mDesc').textContent = entry.description || '';
-    if (entry.name || entry.description) caption.hidden = false;
+    document.getElementById('mTag').textContent = entry.tagline || '';
+    if (entry.name || entry.tagline) caption.hidden = false;
+
     document.title = (entry.name ? entry.name + ' · ' : '') + 'Williams 3D Viewer';
     document.getElementById('shareTitle').textContent = entry.name ? 'Share ' + entry.name : 'Share this model';
+
+    const hasDetails = (entry.description || (entry.specs&&entry.specs.length) ||
+      (entry.applications&&entry.applications.length) || (entry.documents&&entry.documents.length));
+    if (hasDetails) buildPanel(entry); else detailsBtn.style.display = 'none';
   }
 
   // Resolve which model to show.
@@ -221,7 +340,8 @@
   const id = qs.get('m');
 
   if (directSrc) {
-    loadModel({ file: directSrc, name: qs.get('name') || '', description: qs.get('desc') || '' });
+    loadModel({ file: directSrc, name: qs.get('name') || '', tagline: qs.get('desc') || '' });
+    detailsBtn.style.display = 'none';
   } else if (id) {
     fetch('models.json', {cache:'no-cache'})
       .then(r => { if(!r.ok) throw new Error('manifest'); return r.json(); })
@@ -233,7 +353,7 @@
       })
       .catch(() => showMessage('Catalog unavailable', 'Could not load the model list. Check that models.json is published next to this page.'));
   } else {
-    showMessage('No model selected', 'Add ?m=<id> to the link, or open the gallery to pick one.');
+    showMessage('No model selected', 'Add ?m=<id> to the link, or open the catalog to pick one.');
   }
 
   // Loading progress + AR availability

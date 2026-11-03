@@ -1,10 +1,51 @@
 {
+  "categoryOrder": [
+    "Pulverizers",
+    "Power Industry",
+    "Impact Dryer Mills",
+    "Industrial Shredders",
+    "Roll Crushers",
+    "Air Classifiers",
+    "Forest Products",
+    "Steel Conveyors & Apron Feeders",
+    "Impact Crushers",
+    "Hammer Mills",
+    "MineSizer",
+    "Self-Cleaning Rotary Valve",
+    "Custom Fabrication & Machining"
+  ],
   "models": [
     {
-      "id": "30ks-nn-hog",
-      "name": "30KS N.N. Hog",
-      "description": "Williams Patent Crusher & Pulverizer Co. — 30KS N.N. Hog.",
-      "file": "models/30ks-nn-hog.glb"
+      "id": "no-nife-hog",
+      "name": "No-Nife Hog",
+      "category": "Forest Products",
+      "subcategory": "No-Nife Hogs",
+      "shown": "30KS shown",
+      "tagline": "Shreds bark & wood waste by impact — no knives to sharpen.",
+      "description": "Williams \"No-Nife\" Hogs reduce bark and wood waste by impact using swing hammers. With no knives to sharpen, they eliminate tool-room labor and sharpening shutdowns while delivering excellent particle-size control and low power per ton.",
+      "file": "models/30ks-nn-hog.glb",
+      "poster": "posters/no-nife-hog.jpg",
+      "specs": [
+        { "label": "Available sizes", "value": "20KS – 60KS" },
+        { "label": "Capacity", "value": "Up to 300 TPH" },
+        { "label": "Feed opening (30KS)", "value": "24 in (610 mm)" },
+        { "label": "Total weight (30KS)", "value": "11,708 lb" },
+        { "label": "Rotor weight (30KS)", "value": "2,908 lb" },
+        { "label": "Max drive", "value": "Up to 1,250 HP" },
+        { "label": "Design", "value": "Swing-hammer impact, no knives" }
+      ],
+      "applications": [
+        "Sawmill",
+        "Pulp & paper",
+        "Plywood & veneer",
+        "Particleboard & OSB",
+        "Furniture & cabinet",
+        "Construction / demolition",
+        "Hog fuel & biomass"
+      ],
+      "documents": [
+        { "label": "Bulletin 844 — No-Nife Hogs (PDF)", "file": "docs/no-nife-hogs-bulletin.pdf" }
+      ]
     }
   ]
 }
