@@ -1,4 +1,4 @@
-# CoopsGames 3D Viewer
+# Williams Crusher 3D Product Viewer
 
 One viewer, any number of models. Share a model by link or QR — no rebuild per model or per customer.
 
