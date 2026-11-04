@@ -85,7 +85,8 @@
           "label": "Bulletin 856R — Roller Mills (PDF)",
           "file": "docs/roller-mills-bulletin.pdf"
         }
-      ]
+      ],
+      "rev": 2
     },
     {
       "id": "single-roll-crusher",
@@ -202,7 +203,8 @@
           "file": "docs/no-nife-hogs-bulletin.pdf"
         }
       ],
-      "realHeightM": 3.81
+      "realHeightM": 3.81,
+      "rev": 2
     }
   ]
 }

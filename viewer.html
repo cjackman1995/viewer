@@ -358,7 +358,7 @@ function updateScaleFig(){
 
   function loadModel(entry){
     CURRENT = entry;
-    mv.src = entry.file;
+    mv.src = entry.file + (entry.rev?('?v='+entry.rev):'');
       ensureScaleFig(); SCALE_REAL_H=(entry&&entry.realHeightM)?entry.realHeightM:0; updateScaleFig();
     if (entry.iosSrc) mv.setAttribute('ios-src', entry.iosSrc); // USDZ for iOS AR, optional
     mv.removeAttribute('poster'); showLoad();
@@ -387,7 +387,7 @@ function updateScaleFig(){
     loadModel({ file: directSrc, name: qs.get('name') || '', tagline: qs.get('desc') || '' });
     detailsBtn.style.display = 'none';
   } else if (id) {
-    fetch('models.json', {cache:'no-cache'})
+    fetch('models.json?v='+Date.now(), {cache:'no-cache'})
       .then(r => { if(!r.ok) throw new Error('manifest'); return r.json(); })
       .then(data => {
         const list = Array.isArray(data) ? data : (data.models || []);

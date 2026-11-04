@@ -95,7 +95,7 @@ function card(m){
   if (m.poster){
     const img = document.createElement('img');
     img.loading = 'lazy';
-    img.src = m.poster;
+    img.src = m.poster + (m.rev?('?v='+m.rev):'');
     img.alt = m.name;
     // Graceful fallback if a poster is missing — never load the heavy .glb here.
     img.onerror = () => {
@@ -176,7 +176,7 @@ function render(filter){
   if (shown === 0 && f) empty.textContent = 'No equipment matches “' + filter + '”.';
 }
 
-fetch('models.json', {cache:'no-cache'})
+fetch('models.json?v='+Date.now(), {cache:'no-cache'})
   .then(r => r.json())
   .then(data => {
     DATA = {
