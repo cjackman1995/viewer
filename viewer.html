@@ -284,6 +284,10 @@
 
   let CURRENT = null;
 let SCALE_REAL_H = 0;
+var LOADCSS="#loadscreen{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:radial-gradient(130% 110% at 50% 18%, #2a2d35 0%, #17181c 70%);transition:opacity .45s ease}#loadscreen.hide{opacity:0;pointer-events:none}#loadscreen .lsx{display:flex;flex-direction:column;align-items:center;gap:15px}#loadscreen .lss{width:46px;height:46px;border-radius:50%;border:4px solid rgba(255,255,255,.14);border-top-color:#E01820;animation:lssp .85s linear infinite}@keyframes lssp{to{transform:rotate(360deg)}}#loadscreen .lst{color:#c7ccd4;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:.04em}";
+function ensureLoad(){ if(document.getElementById('loadscreen'))return; var st=document.createElement('style'); st.textContent=LOADCSS; document.head.appendChild(st); var ls=document.createElement('div'); ls.id='loadscreen'; ls.className='hide'; ls.innerHTML='<div class="lsx"><div class="lss"></div><div class="lst">Loading 3D model...</div></div>'; document.body.appendChild(ls); mv.addEventListener('load',function(){var e=document.getElementById('loadscreen'); if(e) e.classList.add('hide');}); }
+function showLoad(){ ensureLoad(); var e=document.getElementById('loadscreen'); if(e) e.classList.remove('hide'); }
+
 function ensureScaleFig(){
   if (document.getElementById('scalefig')) return;
   var st=document.createElement('style');
@@ -357,7 +361,7 @@ function updateScaleFig(){
     mv.src = entry.file;
       ensureScaleFig(); SCALE_REAL_H=(entry&&entry.realHeightM)?entry.realHeightM:0; updateScaleFig();
     if (entry.iosSrc) mv.setAttribute('ios-src', entry.iosSrc); // USDZ for iOS AR, optional
-    if (entry.poster) mv.setAttribute('poster', entry.poster);
+    mv.removeAttribute('poster'); showLoad();
     mv.alt = entry.name || 'Williams equipment model';
 
     document.getElementById('mSub').textContent = entry.subcategory || entry.category || '';
