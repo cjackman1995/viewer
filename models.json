@@ -16,6 +16,88 @@
   ],
   "models": [
     {
+      "id": "200-4456-hydraulic-ripshear",
+      "name": "200 HP Hydraulic Ripshear Shredder",
+      "category": "Industrial Shredders",
+      "subcategory": "Ripshear Shredders",
+      "shown": "Model 200-4456 shown",
+      "realHeightM": 2.74,
+      "rev": 1,
+      "tagline": "Slow-speed, high-torque disc-cutting — shreds the toughest heavy-duty material quietly and with minimal dust.",
+      "description": "The Williams Ripshear is a slow-speed shredder that reduces material with a scissor-like disc-cutting action — not by tearing or fracturing. Two opposing shafts of toothed cutting disks turn at low speed under high torque, producing minimal dust, noise and vibration and avoiding the windage and ignition sources of high-speed shredders. The hydraulic Ripshear detects jams by actual shaft stoppage rather than a pressure limit, so it uses the full capability of its hydraulic drive and only reverses on a true mechanical jam. On the 200-4456, two 100 HP motors drive the two shafts (one each) at 15 RPM through a 44 x 56 inch feed opening. Needs only a minimal foundation of concrete slabs or equivalent leg support; can be made portable.",
+      "file": "models/200-4456-hydraulic-ripshear.glb",
+      "poster": "posters/200-4456-hydraulic-ripshear.jpg",
+      "specs": [
+        {
+          "label": "Model (shown)",
+          "value": "200-4456"
+        },
+        {
+          "label": "Drive type",
+          "value": "Hydraulic"
+        },
+        {
+          "label": "Motor power",
+          "value": "2 x 100 HP (200 HP total — one per shaft)"
+        },
+        {
+          "label": "Shaft speed",
+          "value": "15 RPM"
+        },
+        {
+          "label": "Feed opening",
+          "value": "44 x 56 in (1118 x 1422 mm)"
+        },
+        {
+          "label": "Total weight",
+          "value": "36,000 lb"
+        },
+        {
+          "label": "Overall height",
+          "value": "~9 ft (2.74 m)"
+        },
+        {
+          "label": "Cutting action",
+          "value": "Opposing shafts, disc cutters — slow-speed, high-torque"
+        },
+        {
+          "label": "Product size",
+          "value": "Set by disk size and tooth pattern"
+        },
+        {
+          "label": "Foundation",
+          "value": "Minimal — concrete slabs or leg support; portable option"
+        }
+      ],
+      "applications": [
+        "Tires",
+        "Wood waste",
+        "Wallboard",
+        "Municipal solid waste",
+        "Batteries",
+        "Corrugated paper",
+        "55-gallon drums",
+        "Fabric",
+        "Industrial & hospital waste",
+        "Furniture",
+        "Light metal scrap"
+      ],
+      "documents": [
+        {
+          "label": "Bulletin 961R — Hydraulic Ripshear (PDF)",
+          "file": "docs/hydraulic-ripshear-bulletin.pdf"
+        },
+        {
+          "label": "Bulletin 1003 — Electric Ripshear Shredder (PDF)",
+          "file": "docs/electric-ripshear-bulletin.pdf"
+        },
+        {
+          "label": "Particle Size & Mill Application Chart (PDF)",
+          "file": "docs/particle-size-mill-app-chart.pdf"
+        }
+      ]
+    },
+    {
       "id": "df-100-roller-mill",
       "name": "DF-100 Roller Mill",
       "category": "Pulverizers",
