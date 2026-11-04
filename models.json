@@ -147,7 +147,8 @@
           "file": "docs/roll-crushers-bulletin.pdf"
         }
       ],
-      "rev": 2
+      "rev": 2,
+      "realHeightM": 1.37
     },
     {
       "id": "no-nife-hog",
