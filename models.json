@@ -84,6 +84,10 @@
         {
           "label": "Bulletin 856R — Roller Mills (PDF)",
           "file": "docs/roller-mills-bulletin.pdf"
+        },
+        {
+          "label": "Particle Size & Mill Application Chart (PDF)",
+          "file": "docs/particle-size-mill-app-chart.pdf"
         }
       ],
       "rev": 2
@@ -145,21 +149,25 @@
         {
           "label": "Bulletin 915R - Roll Crushers (PDF)",
           "file": "docs/roll-crushers-bulletin.pdf"
+        },
+        {
+          "label": "Particle Size & Mill Application Chart (PDF)",
+          "file": "docs/particle-size-mill-app-chart.pdf"
         }
       ],
       "rev": 2,
       "realHeightM": 1.2
     },
     {
-      "id": "no-nife-hog",
-      "name": "No-Nife Hog",
-      "category": "Forest Products",
-      "subcategory": "No-Nife Hogs",
-      "shown": "30KS shown",
+      "id": "ks-series-hammer-mill",
+      "name": "KS Series Hammer Mill",
+      "category": "Hammer Mills",
+      "subcategory": "KS Series",
+      "shown": "30KS shown — with optional hopper & base",
       "tagline": "Shreds bark & wood waste by impact — no knives to sharpen.",
-      "description": "Williams \"No-Nife\" Hogs reduce bark and wood waste by impact using swing hammers. With no knives to sharpen, they eliminate tool-room labor and sharpening shutdowns while delivering excellent particle-size control and low power per ton.",
-      "file": "models/30ks-nn-hog.glb",
-      "poster": "posters/no-nife-hog.jpg",
+      "description": "The Williams KS-series is a rugged swing-hammer mill for high-capacity size reduction. Fitted with hog hammers it becomes a Williams “No-Nife Hog” for bark and wood waste — no knives to sharpen, so no tool-room labor or sharpening shutdowns — while other hammer configurations handle a broad range of materials with excellent particle-size control and low power per ton. The hopper and base shown are optional — supplied with most mills but not standard equipment.",
+      "file": "models/ks-series-hammer-mill.glb",
+      "poster": "posters/ks-series-hammer-mill.jpg",
       "specs": [
         {
           "label": "Available sizes",
@@ -201,8 +209,12 @@
       ],
       "documents": [
         {
-          "label": "Bulletin 844 — No-Nife Hogs (PDF)",
-          "file": "docs/no-nife-hogs-bulletin.pdf"
+          "label": "Bulletin 844 — KS Hammer Mills / No-Nife Hogs (PDF)",
+          "file": "docs/ks-hammer-mills-bulletin.pdf"
+        },
+        {
+          "label": "Particle Size & Mill Application Chart (PDF)",
+          "file": "docs/particle-size-mill-app-chart.pdf"
         }
       ],
       "realHeightM": 3.81,
