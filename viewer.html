@@ -290,8 +290,8 @@ function ensureScaleFig(){
   st.textContent='#scalefig{position:fixed;z-index:60;pointer-events:none;display:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));}#scalefig svg{display:block;height:100%;width:auto;}#scalelegend{position:fixed;z-index:60;pointer-events:none;display:none;font:600 11px/1.3 -apple-system,Segoe UI,Roboto,sans-serif;color:#2a2d31;background:rgba(255,255,255,.92);padding:6px 9px;border-radius:7px;box-shadow:0 1px 3px rgba(0,0,0,.2);}';
   document.head.appendChild(st);
   var fig=document.createElement('div');fig.id='scalefig';fig.setAttribute('aria-hidden','true');
-  fig.innerHTML='<svg viewBox="0 0 44 170" preserveAspectRatio="xMidYMax meet" fill="#3a3d42"><circle cx="22" cy="17" r="14"/><rect x="11" y="33" width="22" height="58" rx="10"/><rect x="3" y="37" width="9" height="42" rx="4.5"/><rect x="32" y="37" width="9" height="42" rx="4.5"/><rect x="12" y="84" width="9" height="82" rx="4.5"/><rect x="23" y="84" width="9" height="82" rx="4.5"/></svg>';
-  var lg=document.createElement('div');lg.id='scalelegend';lg.textContent='Scale: figure = 6 ft (1.8 m) person';
+  fig.innerHTML='<svg viewBox="0 0 44 170" preserveAspectRatio="xMidYMax meet" fill="#E01820"><circle cx="22" cy="17" r="14"/><rect x="11" y="33" width="22" height="58" rx="10"/><rect x="3" y="37" width="9" height="42" rx="4.5"/><rect x="32" y="37" width="9" height="42" rx="4.5"/><rect x="12" y="84" width="9" height="82" rx="4.5"/><rect x="23" y="84" width="9" height="82" rx="4.5"/></svg>';
+  var lg=document.createElement('div');lg.id='scalelegend';lg.textContent='6 ft (1.8 m)';
   document.body.appendChild(fig);document.body.appendChild(lg);
   mv.addEventListener('camera-change',updateScaleFig);
   mv.addEventListener('load',updateScaleFig);
@@ -319,7 +319,7 @@ function updateScaleFig(){
   topY=Math.max(minTop,Math.min(topY,maxTop));
   fig.style.top=topY+'px';
   fig.style.left=(rect.left+rect.width*0.08)+'px';
-  if(lg){lg.style.left=(rect.left+12)+'px';lg.style.top=(rect.bottom-lg.offsetHeight-12)+'px';}
+  if(lg){var figW=personPx*(44/170);lg.style.left=(rect.left+rect.width*0.08+figW+8)+'px';lg.style.top=(topY+personPx*0.12)+'px';}
 }
 
 
