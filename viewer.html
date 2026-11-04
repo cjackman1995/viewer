@@ -283,6 +283,45 @@
   }
 
   let CURRENT = null;
+let SCALE_REAL_H = 0;
+function ensureScaleFig(){
+  if (document.getElementById('scalefig')) return;
+  var st=document.createElement('style');
+  st.textContent='#scalefig{position:fixed;z-index:60;pointer-events:none;display:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));}#scalefig svg{display:block;height:100%;width:auto;}#scalelegend{position:fixed;z-index:60;pointer-events:none;display:none;font:600 11px/1.3 -apple-system,Segoe UI,Roboto,sans-serif;color:#2a2d31;background:rgba(255,255,255,.92);padding:6px 9px;border-radius:7px;box-shadow:0 1px 3px rgba(0,0,0,.2);}';
+  document.head.appendChild(st);
+  var fig=document.createElement('div');fig.id='scalefig';fig.setAttribute('aria-hidden','true');
+  fig.innerHTML='<svg viewBox="0 0 44 170" preserveAspectRatio="xMidYMax meet" fill="#3a3d42"><circle cx="22" cy="17" r="14"/><rect x="11" y="33" width="22" height="58" rx="10"/><rect x="3" y="37" width="9" height="42" rx="4.5"/><rect x="32" y="37" width="9" height="42" rx="4.5"/><rect x="12" y="84" width="9" height="82" rx="4.5"/><rect x="23" y="84" width="9" height="82" rx="4.5"/></svg>';
+  var lg=document.createElement('div');lg.id='scalelegend';lg.textContent='Scale: figure = 6 ft (1.8 m) person';
+  document.body.appendChild(fig);document.body.appendChild(lg);
+  mv.addEventListener('camera-change',updateScaleFig);
+  mv.addEventListener('load',updateScaleFig);
+  window.addEventListener('resize',updateScaleFig);
+  window.addEventListener('scroll',updateScaleFig,true);
+}
+function updateScaleFig(){
+  var fig=document.getElementById('scalefig'),lg=document.getElementById('scalelegend');
+  if(!fig)return;
+  var hide=function(){fig.style.display='none';if(lg)lg.style.display='none';};
+  if(!SCALE_REAL_H||!mv.loaded){hide();return;}
+  var dims,orbit,fov;try{dims=mv.getDimensions();orbit=mv.getCameraOrbit();fov=mv.getFieldOfView();}catch(e){hide();return;}
+  if(!dims||!dims.y||!orbit||!orbit.radius||!fov){hide();return;}
+  var rect=mv.getBoundingClientRect();if(!rect.height){hide();return;}
+  var pxPerUnit=rect.height/(2*orbit.radius*Math.tan(fov*Math.PI/360));
+  var modelPx=dims.y*pxPerUnit;
+  var personPx=(1.83/SCALE_REAL_H)*modelPx;
+  if(!isFinite(personPx)||personPx<8){hide();return;}
+  fig.style.display='block';if(lg)lg.style.display='block';
+  fig.style.height=personPx+'px';
+  var feetY=rect.top+rect.height/2+modelPx/2;
+  var topY=feetY-personPx;
+  var minTop=rect.top+2,maxTop=rect.top+rect.height-personPx-2;
+  if(maxTop<minTop)maxTop=minTop;
+  topY=Math.max(minTop,Math.min(topY,maxTop));
+  fig.style.top=topY+'px';
+  fig.style.left=(rect.left+rect.width*0.08)+'px';
+  if(lg){lg.style.left=(rect.left+12)+'px';lg.style.top=(rect.bottom-lg.offsetHeight-12)+'px';}
+}
+
 
   function buildPanel(entry){
     const rows = (entry.specs||[]).map(s =>
@@ -316,6 +355,7 @@
   function loadModel(entry){
     CURRENT = entry;
     mv.src = entry.file;
+      ensureScaleFig(); SCALE_REAL_H=(entry&&entry.realHeightM)?entry.realHeightM:0; updateScaleFig();
     if (entry.iosSrc) mv.setAttribute('ios-src', entry.iosSrc); // USDZ for iOS AR, optional
     if (entry.poster) mv.setAttribute('poster', entry.poster);
     mv.alt = entry.name || 'Williams equipment model';

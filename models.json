@@ -16,6 +16,78 @@
   ],
   "models": [
     {
+      "id": "df-100-roller-mill",
+      "name": "DF-100 Roller Mill",
+      "category": "Pulverizers",
+      "subcategory": "Roller Mills",
+      "shown": "DF-100 shown",
+      "realHeightM": 12.8,
+      "tagline": "High-capacity fine grinding of coal & minerals — with integral air classification.",
+      "description": "The Williams DF Roller Mill grinds and classifies in a single pass. Spring-loaded rolls crush material against a rotating grinding ring while a built-in centrifugal separator returns oversize for regrinding and carries finished product out with the air stream. Rugged and built for continuous duty, it pulverizes coal and a broad range of minerals to a controlled, classifier-set fineness.",
+      "file": "models/df-100-roller-mill.glb",
+      "poster": "posters/df-100-roller-mill.jpg",
+      "specs": [
+        {
+          "label": "Size (shown)",
+          "value": "DF-100"
+        },
+        {
+          "label": "Grinding rolls",
+          "value": "4 rolls @ 23 in"
+        },
+        {
+          "label": "Grinding ring open area",
+          "value": "41.5 sq ft"
+        },
+        {
+          "label": "Mill speed",
+          "value": "~77 RPM"
+        },
+        {
+          "label": "Mill drive",
+          "value": "700–1,000 HP (1,300 HP motor @ 900 RPM)"
+        },
+        {
+          "label": "Separator / classifier",
+          "value": "75–100 HP @ 1,800 RPM"
+        },
+        {
+          "label": "Air seal",
+          "value": "60 CFM @ 10–15 PSI"
+        },
+        {
+          "label": "Weight (mill)",
+          "value": "94,600 lb"
+        },
+        {
+          "label": "Weight (with separator)",
+          "value": "118,750 lb"
+        },
+        {
+          "label": "Footprint",
+          "value": "~17.6 ft (5.4 m) across"
+        },
+        {
+          "label": "Overall height",
+          "value": "~42 ft (12.8 m) incl. base"
+        }
+      ],
+      "applications": [
+        "Coal pulverizing",
+        "Petroleum coke",
+        "Limestone",
+        "Gypsum",
+        "Clay & shale",
+        "Minerals & chemicals"
+      ],
+      "documents": [
+        {
+          "label": "Bulletin 856R — Roller Mills (PDF)",
+          "file": "docs/roller-mills-bulletin.pdf"
+        }
+      ]
+    },
+    {
       "id": "single-roll-crusher",
       "name": "Single Roll Crusher",
       "category": "Roll Crushers",
