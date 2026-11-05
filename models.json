@@ -16,6 +16,92 @@
   ],
   "models": [
     {
+      "id": "220-reversible-impactor",
+      "name": "220 Reversible Impactor",
+      "category": "Impact Crushers",
+      "subcategory": "Reversible Impactors",
+      "shown": "Model 220 shown",
+      "realHeightM": 1.07,
+      "rev": 1,
+      "tagline": "High-capacity secondary and tertiary crushing by mid-air impact — with a reversible rotor for extended wear life.",
+      "description": "The Williams Reversible Impactor is a horizontal shaft impactor (HSI) built for high-capacity secondary and tertiary crushing. High-speed hammers strike and accelerate feed against stationary manganese impact blocks, and repeated impacts reduce the material until it passes out through a large, unrestricted discharge opening. The rotor is reversible, so operators can reverse direction to use the opposite working face of each hammer, doubling wear life between change-outs without opening the mill. One-piece cast manganese impact blocks also rotate top-to-bottom to use more wear surface before replacement. Few close tolerances and no cage bars make the design well-suited to wet, sticky, or hard-to-discharge materials that plug other crushers.",
+      "file": "models/220-reversible-impactor.glb",
+      "poster": "posters/220-reversible-impactor.jpg",
+      "specs": [
+        {
+          "label": "Model (shown)",
+          "value": "220"
+        },
+        {
+          "label": "Rotor diameter",
+          "value": "24 in"
+        },
+        {
+          "label": "Feed opening width",
+          "value": "20 in"
+        },
+        {
+          "label": "Overall height",
+          "value": "~42 in (~1.07 m)"
+        },
+        {
+          "label": "Rotor type",
+          "value": "Reversible horizontal shaft"
+        },
+        {
+          "label": "Impact blocks",
+          "value": "One-piece cast manganese, rotatable top-to-bottom"
+        },
+        {
+          "label": "Hammers",
+          "value": "Heat-treated alloy steel, reversible"
+        },
+        {
+          "label": "Shaft",
+          "value": "Forged, heat-treated steel"
+        },
+        {
+          "label": "Bearings",
+          "value": "Heavy-duty self-aligning double-row anti-friction"
+        },
+        {
+          "label": "Drive",
+          "value": "V-belt or direct coupling"
+        },
+        {
+          "label": "Discharge",
+          "value": "Open, unrestricted (no cage bars)"
+        },
+        {
+          "label": "Typical duty",
+          "value": "Secondary / tertiary crushing (after primary reduction)"
+        }
+      ],
+      "applications": [
+        "Stone & quarry rock",
+        "Limestone & minerals",
+        "Coal",
+        "Ore",
+        "Clay & shale",
+        "Refractories",
+        "Ceramics",
+        "Scrap glass",
+        "Chemicals",
+        "Fertilizers",
+        "Wet / sticky materials"
+      ],
+      "documents": [
+        {
+          "label": "Bulletin 855R — Reversible Impactors (PDF)",
+          "file": "docs/rev-impactors-bulletin.pdf"
+        },
+        {
+          "label": "Particle Size & Mill Application Chart (PDF)",
+          "file": "docs/particle-size-mill-app-chart.pdf"
+        }
+      ]
+    },
+    {
       "id": "200-4456-hydraulic-ripshear",
       "name": "200 HP Hydraulic Ripshear Shredder",
       "category": "Industrial Shredders",
