@@ -16,6 +16,83 @@
   ],
   "models": [
     {
+      "id": "20x18-double-roll-crusher",
+      "name": "20x18 Double Roll Crusher",
+      "category": "Roll Crushers",
+      "subcategory": "Double Roll Crushers",
+      "shown": "20x18 shown",
+      "realHeightM": 0.91,
+      "rev": 1,
+      "tagline": "Two smooth rolls, tight gap — low-fines crushing with a clean 4:1 reduction.",
+      "description": "The Williams Double Roll Crusher reduces material by compression between two counter-rotating smooth rolls set to a controlled gap. It is well suited to coal, rock, and other friable material where minimum fines are wanted: the controlled gap limits product top size, and the low-speed roll action avoids the impact-driven fines of a hammer mill. Reduction is limited to about 4:1, so double rolls are typically used as secondary crushers after primary reduction. The 20x18 shown runs 50—100 RPM on the rolls, driven by a 25—40 HP V-belt drive from a 1,200 RPM motor; approximate weight 5,725 lb.",
+      "file": "models/20x18-double-roll-crusher.glb",
+      "poster": "posters/20x18-double-roll-crusher.jpg",
+      "specs": [
+        {
+          "label": "Model (shown)",
+          "value": "20 x 18"
+        },
+        {
+          "label": "Roll diameter",
+          "value": "20 in"
+        },
+        {
+          "label": "Roll width",
+          "value": "18 in"
+        },
+        {
+          "label": "Reduction ratio",
+          "value": "Up to 4:1"
+        },
+        {
+          "label": "Roll speed",
+          "value": "50—100 RPM"
+        },
+        {
+          "label": "Drive",
+          "value": "V-belt from 1,200 RPM motor"
+        },
+        {
+          "label": "Motor power",
+          "value": "25—40 HP"
+        },
+        {
+          "label": "Approx. weight",
+          "value": "5,725 lb"
+        },
+        {
+          "label": "Overall height",
+          "value": "~3 ft (~0.91 m)"
+        },
+        {
+          "label": "Design",
+          "value": "Two smooth counter-rotating rolls — compression crushing"
+        },
+        {
+          "label": "Typical duty",
+          "value": "Secondary crushing of coal, rock, and friable materials"
+        }
+      ],
+      "applications": [
+        "Coal",
+        "Limestone",
+        "Rock & minerals",
+        "Friable materials",
+        "Secondary crushing after primary reduction",
+        "Applications requiring minimum fines"
+      ],
+      "documents": [
+        {
+          "label": "Bulletin 915R — Roll Crushers (PDF)",
+          "file": "docs/roll-crushers-bulletin.pdf"
+        },
+        {
+          "label": "Particle Size & Mill Application Chart (PDF)",
+          "file": "docs/particle-size-mill-app-chart.pdf"
+        }
+      ]
+    },
+    {
       "id": "220-reversible-impactor",
       "name": "220 Reversible Impactor",
       "category": "Impact Crushers",
