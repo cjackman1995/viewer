@@ -16,6 +16,97 @@
   ],
   "models": [
     {
+      "id": "230-impact-dryer-mill",
+      "name": "#230 Impact Dryer Mill",
+      "category": "Impact Dryer Mills",
+      "subcategory": "IDM Systems",
+      "shown": "#230 IDM shown (24 x 30 rotor, air-swept)",
+      "realHeightM": 2.44,
+      "rev": 1,
+      "tagline": "Grinds, dries and classifies in one air-swept pass — the heart of a complete Williams IDM system.",
+      "description": "The Williams Impact Dryer Mill (IDM) combines grinding, drying and air classification in a single air-swept pass. High-speed hammers reduce the feed while heated process air sweeps moisture out with the fines, so a wet, lumpy feed enters and a dried, classified, controlled-size product leaves. The #230 shown has a 24 in (610 mm) x 30 in (762 mm) rotor and is sold as the heart of a complete IDM system with a dynamic separator for product classification, a venturi for fines pre-stripping, over-rotor drying column, vibratory feeder, heated-air train (high-efficiency fan, duct burner, bag filter, ductwork) and a PLC control package. Representative duty on this unit: 0.5—1 TPH feed rate of minus 1/2 in DRI sludge/fines at up to 15 percent moisture, producing a nominal 1/4 in product dried to 1 percent moisture or less (capacity confirmed by Williams test lab).",
+      "file": "models/230-impact-dryer-mill.glb",
+      "poster": "posters/230-impact-dryer-mill.jpg",
+      "specs": [
+        {
+          "label": "Model (shown)",
+          "value": "#230 IDM"
+        },
+        {
+          "label": "Rotor size",
+          "value": "24 x 30 in (610 x 762 mm)"
+        },
+        {
+          "label": "Operating principle",
+          "value": "Air-swept hammer mill — simultaneous grind + dry + classify"
+        },
+        {
+          "label": "Classifier",
+          "value": "42 in (1,067 mm) Williams Dynamic Separator"
+        },
+        {
+          "label": "Typical feed",
+          "value": "Up to 15% moisture; -1/2 in top size"
+        },
+        {
+          "label": "Typical product",
+          "value": "Nominal 1/4 in, dried to ≤ 1% moisture"
+        },
+        {
+          "label": "Mill drive",
+          "value": "200 HP @ 1,800 RPM"
+        },
+        {
+          "label": "System fan",
+          "value": "200 HP @ 1,800 RPM (with VFD)"
+        },
+        {
+          "label": "Heated air",
+          "value": "18,000 CFM @ 35 in WC static boost"
+        },
+        {
+          "label": "Burner",
+          "value": "3 MMBTU/hr duct burner (propane; full safety train)"
+        },
+        {
+          "label": "Overall mill height",
+          "value": "~8 ft (~2.44 m)"
+        }
+      ],
+      "systemIncludes": [
+        "#230 Impact Dryer Mill with mill drive and motor",
+        "Williams 42 in Dynamic Separator for product classification (drive + motor)",
+        "Williams Venturi for fines pre-stripping",
+        "Drying column with over-rotor feed location",
+        "Vibratory feeder with supersack hopper",
+        "High-efficiency BCMS system fan with guarded V-belt drive and VFD",
+        "Inlet box with electrically actuated damper for air-flow flexibility",
+        "3 MMBTU/hr duct burner — propane fuel train, pilot, safety system, combustion blower, air filter, stainless piping",
+        "Exhaust bag filter — 240 polyester bags, staggered baffle entry, pulse-cleaning system, pyramidal outlet hopper, rotary discharge valve, access platform with ladder",
+        "Interconnecting ductwork with replaceable wear-back elbow",
+        "PLC control package — wall-mounted touchscreen cabinet, instrumentation, control programming, field interconnect diagram"
+      ],
+      "applications": [
+        "DRI sludge & fines",
+        "Wet or sticky materials",
+        "Clays & gypsum",
+        "Fluid-bed fuel",
+        "Coarse sorbent",
+        "Wallboard feed",
+        "Simultaneous drying + fine grinding applications"
+      ],
+      "documents": [
+        {
+          "label": "Bulletin 882 — Impact Dryer Mills (PDF)",
+          "file": "docs/impact-dryer-mills-bulletin.pdf"
+        },
+        {
+          "label": "Particle Size & Mill Application Chart (PDF)",
+          "file": "docs/particle-size-mill-app-chart.pdf"
+        }
+      ]
+    },
+    {
       "id": "20x18-double-roll-crusher",
       "name": "20x18 Double Roll Crusher",
       "category": "Roll Crushers",

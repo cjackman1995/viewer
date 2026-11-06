@@ -121,6 +121,9 @@
     font-size:12px; padding:5px 10px; border-radius:999px}
 
   .docs{display:flex; flex-direction:column; gap:8px}
+  .syslist{margin:0; padding:0 0 0 18px; color:#c7ccd4; font-size:13.5px; line-height:1.55}
+  .syslist li{margin:0 0 6px}
+  .syslead{color:var(--muted); font-size:12px; margin:0 0 6px}
   .doc{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--fg);
     background:#23262e; border:1px solid var(--line); border-radius:10px; padding:11px 13px;
     font-size:13.5px; font-weight:600; transition:background .15s, border-color .15s}
@@ -339,6 +342,8 @@ function updateScaleFig(){
     let html = '';
     if (entry.description) html += '<p class="lede">'+esc(entry.description)+'</p>';
     if (rows) html += '<h3>Specifications</h3><table class="specs"><tbody>'+rows+'</tbody></table>';
+    const sys = (entry.systemIncludes||[]).map(x => '<li>'+esc(x)+'</li>').join('');
+    if (sys) html += '<h3>Complete System Scope</h3><p class="syslead">Representative scope of a complete Williams system built around this mill.</p><ul class="syslist">'+sys+'</ul>';
     if (chips) html += '<h3>Applications</h3><div class="chips">'+chips+'</div>';
     if (docs) html += '<h3>Downloads</h3><div class="docs">'+docs+'</div>';
 
@@ -373,7 +378,7 @@ function updateScaleFig(){
     document.getElementById('shareTitle').textContent = entry.name ? 'Share ' + entry.name : 'Share this model';
 
     const hasDetails = (entry.description || (entry.specs&&entry.specs.length) ||
-      (entry.applications&&entry.applications.length) || (entry.documents&&entry.documents.length));
+      (entry.applications&&entry.applications.length) || (entry.documents&&entry.documents.length) || (entry.systemIncludes&&entry.systemIncludes.length));
     if (hasDetails) buildPanel(entry); else detailsBtn.style.display = 'none';
   }
 
